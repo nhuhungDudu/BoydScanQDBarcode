@@ -366,6 +366,14 @@ namespace BoydScanQDBarcode.MVVM.Views
                 catch
                 {
                     AddLogError($"Failed to mark fixture {serialNumber} as scrapped in database. Please check the database connection and try again.");
+
+                    Dispatcher.Invoke(() =>
+                    {
+                        var dialog = new WDMessageView($"Không đẩy được dữ liệu fixture {serialNumber} lên bảng Scrapped! Hãy gọi Technical! ", 10000);
+                        dialog.ShowDialog();   // Fixed: removed 'this'
+                    });
+
+
                 }
 
 
@@ -415,9 +423,9 @@ namespace BoydScanQDBarcode.MVVM.Views
         {
             try
             {
-                string insertQuery = $@"INSERT INTO [EquipmentManagerment].[dbo].[[EquipmentFixtureScrapped]] 
+                string insertQuery = $@"INSERT INTO [EquipmentManagerment].[dbo].[EquipmentFixtureScrapped] 
                                     ( [SerialNumber]
-                                      ,[Date_Time]
+                                      ,[Date_Time])
                                     VALUES ('{serialNumber}', GETDATE())";
                 ParameterDB.ExecuteQuery(insertQuery);
             }

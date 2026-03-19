@@ -90,7 +90,8 @@ using System.Data.SqlClient; // Ensure this is present
             catch (Exception ex)
             {
                 //log.Error("Query Error: " + ex.Message);
-            }
+                throw new Exception("Database query failed: " + ex.Message);
+        }
             finally
             {
                 Close();
