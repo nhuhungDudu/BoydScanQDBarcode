@@ -42,7 +42,7 @@
                         <TextBlock Grid.Row="0" Text="Hãy đọc QD Barcode" FontSize="30" FontWeight="DemiBold" Foreground="{StaticResource PrimaryBrush}" Margin="0,0,0,0"
                            VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Century Gothic"/>
 
-                        <Border Grid.Row="1" CornerRadius="5" Background="White" BorderBrush="LightGray" BorderThickness="1" Margin="5">
+                        <Border Grid.Row="1" CornerRadius="5" Background="White" BorderBrush="LightGray" BorderThickness="1" Margin="5,15,5,5">
                             <TextBox x:Name="txtQDDataInput" Grid.Row="1" TextAlignment="Center" Margin="0" FontFamily="Century Gothic" BorderThickness="0"
                          HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="18"  TextChanged="OnQDDataInputChanged"/>
                         </Border>
@@ -60,20 +60,31 @@
                 <Grid Grid.Row="2" Margin="5">
                     <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Horizontal">
                         <TextBlock Text="QD Lifetime:" VerticalAlignment="Center" HorizontalAlignment="Left" FontFamily="Century Gothic"/>
-                        <TextBlock x:Name="txtQDLifetime" Text="{Binding QDLifetime}" FontSize="13" FontWeight="SemiBold" Foreground="{StaticResource PrimaryBrush}" Margin="5,0,0,0"
-                               VerticalAlignment="Center" HorizontalAlignment="Left" Width="150" TextAlignment="Center" Background="White" FontFamily="Century Gothic"/>
+
+                        <Border CornerRadius="5" Background="White" BorderBrush="LightGray" BorderThickness="1" Margin="5,0,0,0" Height="30">
+                            <TextBlock x:Name="txtQDLifetime" Text="{Binding QDLifetime}" FontSize="13" FontWeight="SemiBold" Foreground="{StaticResource PrimaryBrush}"
+                               VerticalAlignment="Center" HorizontalAlignment="Left" Width="150" TextAlignment="Center" FontFamily="Century Gothic"/>
+                        </Border>
+                            
+
                     </StackPanel>
 
                     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
                         <TextBlock Text="QD Remaining Times:" VerticalAlignment="Center" HorizontalAlignment="Left" FontFamily="Century Gothic"/>
-                        <TextBlock x:Name="txtQDRemainingTimes" Text="{Binding QDRemainingTimes}" FontSize="13" FontWeight="SemiBold" Foreground="{StaticResource PrimaryBrush}" Margin="5,0,0,0"
-                               VerticalAlignment="Center" HorizontalAlignment="Left" Width="150" TextAlignment="Center" Background="White" FontFamily="Century Gothic"/>
+
+                        <Border x:Name="borderRemainingTimes" CornerRadius="5" Background="White" BorderBrush="LightGray" BorderThickness="1" Margin="5,0,0,0" Height="30">
+                            <TextBlock x:Name="txtQDRemainingTimes" Text="{Binding QDRemainingTimes}" FontSize="13" FontWeight="SemiBold" Foreground="{StaticResource PrimaryBrush}"
+                               VerticalAlignment="Center" HorizontalAlignment="Left" Width="150" TextAlignment="Center" Background="Transparent" FontFamily="Century Gothic"/>
+                        </Border>
                     </StackPanel>
 
                     <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center" Orientation="Horizontal">
                         <TextBlock Text="Station ID:" VerticalAlignment="Center" HorizontalAlignment="Left" FontFamily="Century Gothic"/>
-                        <TextBlock x:Name="txtStationID" Text="{Binding StationID}" FontSize="13" FontWeight="SemiBold" Foreground="{StaticResource PrimaryBrush}" Margin="5,0,0,0"
+
+                        <Border CornerRadius="5" Background="White" BorderBrush="LightGray" BorderThickness="1" Margin="5,0,0,0" Height="30">
+                            <TextBlock x:Name="txtStationID" Text="{Binding StationID}" FontSize="13" FontWeight="SemiBold" Foreground="{StaticResource PrimaryBrush}"
                                VerticalAlignment="Center" HorizontalAlignment="Left" Width="150" TextAlignment="Center" Background="White" FontFamily="Century Gothic"/>
+                        </Border>
                     </StackPanel>
                 </Grid>
 

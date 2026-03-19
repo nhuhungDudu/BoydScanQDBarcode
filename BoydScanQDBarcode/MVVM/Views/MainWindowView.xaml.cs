@@ -154,8 +154,8 @@ namespace BoydScanQDBarcode.MVVM.Views
             {
                 await SetCheckingResult();
 
-                AddLogInfor($"-----------------------------------------------------------");
-                AddLogInfor($"-----------------------------------------------------------");
+                AddLogInfor($"-------------------------------------------------------------------------------------------------------------------------");
+                AddLogInfor($"-------------------------------------------------------------------------------------------------------------------------");
 
                 AddLogInfor($"Scanned QD fixture with Serial Number: {QDInput}");
 
@@ -310,39 +310,12 @@ namespace BoydScanQDBarcode.MVVM.Views
 
             DataTable dtResult = ParameterDB.ExecuteQuery(query);
 
-            /*            if ((iLifeTimeLimit - dtResult.Rows.Count) < ClsDefine.DefineSystem.iLifeTimeWarning)
-                        {
-                            //log.Warn($"[{serialNumber}] is approaching its lifetime limit. Remaining lifetime: {iLifeTimeLimit - dtResult.Rows.Count}");
-
-                            Dispatcher.Invoke(() =>
-                            {
-                                var dialog = new WDMessageView($"Fixture cần được thay thế!!!\r\n tuổi thọ còn lại {iLifeTimeLimit - dtResult.Rows.Count}" , 10000);
-                                dialog.ShowDialog();   // Fixed: removed 'this'
-                            });
-                            return false;
-                        }*/
-            /*            LifeTimeLog QDlifeTime = LifeTimeLogManager.LoadLog(ClsDefine.DefineSystem.sQDlogpath);
-                        if (QDlifeTime != null)
-                        {
-                            QDlifeTime.TimeUsed = dtResult.Rows.Count + 1;
-                            QDlifeTime.LifeTimeWarning = iLifeTimeLimit - dtResult.Rows.Count;
-                            LifeTimeLogManager.AddOrReplaceLog(QDlifeTime, ClsDefine.DefineSystem.sQDlogpath);
-                        }
-                        if (QDlifeTime == null || dtResult.Rows.Count == 0)
-                        {
-                            QDlifeTime = new LifeTimeLog();
-                            QDlifeTime.SerialNumber = serialNumber;
-                            QDlifeTime.TimeUsed = dtResult.Rows.Count + 1;
-                            QDlifeTime.LifeTimeWarning = iLifeTimeLimit - dtResult.Rows.Count;
-                            QDlifeTime.DateTimeAdded = DateTime.Now;
-                            LifeTimeLogManager.AddOrReplaceLog(QDlifeTime, ClsDefine.DefineSystem.sQDlogpath);
-                        }*/
-
 
             //Calculate remaining lifetime and update UI
             int timeRemaining = iLifeTimeLimit - dtResult.Rows.Count;
             txtQDRemainingTimes.Text = timeRemaining.ToString();
-            txtQDRemainingTimes.Background = (timeRemaining <= ClsDefine.DefineSystem.iLifeTimeWarning) ? Brushes.Red : Brushes.White;
+            borderRemainingTimes.Background = (timeRemaining <= ClsDefine.DefineSystem.iLifeTimeWarning) ? Brushes.Red : Brushes.White;
+
             string message = $"Fixture {serialNumber} has been used {dtResult.Rows.Count} times based on database records. Remaining times {timeRemaining}.";
             if (timeRemaining <= ClsDefine.DefineSystem.iLifeTimeWarning)
             {

@@ -18,7 +18,7 @@
         </Border>
 
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10">
-            <Button Content="OK" Width="150" Style="{StaticResource OKCloseMessageButtonStyle}" Height="40" Click="OnOkButtonClick"/>
+            <Button Content="OK" Width="150" Style="{StaticResource OKCloseMessageButtonStyle}" Height="50" Click="OnOkButtonClick"/>
         </StackPanel>
     </Grid>
 </Window>
