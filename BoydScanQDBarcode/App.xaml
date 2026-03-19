@@ -1,0 +1,152 @@
+﻿<Application x:Class="BoydScanQDBarcode.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Application.Resources>
+
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/OKCloseMessageButtonStyle.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <Color x:Key="MainBackgroundColor">#F3F4F6</Color>
+            <Color x:Key="CardBackgroundColor">#FFFFFF</Color>
+            <Color x:Key="PrimaryColor">#FF0B2141</Color>
+            <Color x:Key="AccentColor">#2563EB</Color>
+            <Color x:Key="PassColor">#22C55E</Color>
+            <Color x:Key="AbortColor">#FBBF24</Color>
+            <Color x:Key="IdleColor">#E5E7EB</Color>
+            <Color x:Key="TextColor">#111827</Color>
+            <Color x:Key="SystemStatsColor">#FFFFFF</Color>
+
+            <SolidColorBrush x:Key="MainBackgroundBrush" Color="{StaticResource MainBackgroundColor}" />
+            <SolidColorBrush x:Key="CardBackgroundBrush" Color="{StaticResource CardBackgroundColor}" />
+            <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource PrimaryColor}" />
+            <SolidColorBrush x:Key="AccentBrush" Color="{StaticResource AccentColor}" />
+            <SolidColorBrush x:Key="PassBrush" Color="{StaticResource PassColor}" />
+            <SolidColorBrush x:Key="AbortBrush" Color="{StaticResource AbortColor}" />
+            <SolidColorBrush x:Key="IdleBrush" Color="{StaticResource IdleColor}" />
+            <SolidColorBrush x:Key="TextBrush" Color="{StaticResource TextColor}" />
+            <SolidColorBrush x:Key="SystemStatsBrush" Color="{StaticResource SystemStatsColor}" />
+
+            <Style x:Key="TextBlockNormal" TargetType="TextBlock">
+                <Setter Property="Foreground" Value="{StaticResource TextBrush}" />
+                <Setter Property="FontSize" Value="12" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+            </Style>
+
+            <Style x:Key="HeaderedContentControlStyle" TargetType="HeaderedContentControl">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="HeaderedContentControl">
+                            <StackPanel Margin="0,5">
+                                <ContentPresenter ContentSource="Header" ContentTemplate="{TemplateBinding HeaderTemplate}">
+                                    <ContentPresenter.Resources>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="FontWeight" Value="SemiBold" />
+                                            <Setter Property="FontSize" Value="14" />
+                                            <Setter Property="Foreground" Value="{StaticResource PrimaryBrush}" />
+                                        </Style>
+                                    </ContentPresenter.Resources>
+                                </ContentPresenter>
+                                <Border BorderBrush="{StaticResource PrimaryBrush}" BorderThickness="0,0.5,0,0" Margin="0,2"/>
+                                <ContentPresenter Margin="0,5,0,0"/>
+                            </StackPanel>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style TargetType="TextBox">
+                <Setter Property="BorderThickness" Value="1" />
+                <Setter Property="BorderBrush" Value="#E5E7EB" />
+                <Setter Property="Background" Value="White" />
+                <Setter Property="Padding" Value="5,2" />
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="Height" Value="28" />
+            </Style>
+
+            <Style TargetType="ProgressBar">
+                <Setter Property="Height" Value="10" />
+                <Setter Property="Foreground" Value="{StaticResource PassBrush}" />
+                <Setter Property="Background" Value="#E5E7EB" />
+                <Setter Property="BorderThickness" Value="0" />
+                <Setter Property="Maximum" Value="100" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ProgressBar">
+                            <Grid x:Name="TemplateRoot">
+                                <Border Background="{TemplateBinding Background}" CornerRadius="2"/>
+                                <Rectangle x:Name="PART_Indicator" HorizontalAlignment="Left" RadiusX="5" RadiusY="5">
+                                    <Rectangle.Fill>
+                                        <TemplateBinding Property="Foreground"/>
+                                    </Rectangle.Fill>
+                                </Rectangle>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+
+            <!--Toggle Button Style-->
+            <Style x:Key="RelayToggleButton" TargetType="ToggleButton">
+                <Setter Property="Width" Value="Auto"/>
+                <Setter Property="Height" Value="50"/>
+                <Setter Property="Margin" Value="5"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ToggleButton">
+                            <Border x:Name="OuterBorder" Background="#E5E7EB" CornerRadius="6" BorderThickness="1" BorderBrush="#D1D5DB">
+                                <Grid Margin="3">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="30"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <TextBlock Text="{TemplateBinding Content}" VerticalAlignment="Center" Margin="5,0" FontWeight="SemiBold"/>
+
+                                    <Border Grid.Column="1" CornerRadius="4" Background="White" HorizontalAlignment="Right" Margin="0,0,5,0">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*"/>
+                                                <RowDefinition Height="*"/>
+                                            </Grid.RowDefinitions>
+                                            <Border x:Name="OffIndicator" Grid.Row="0" Background="#9CA3AF" CornerRadius="3,3,0,0">
+                                                <TextBlock Text="OFF" FontSize="10" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                            <Border x:Name="OnIndicator" Grid.Row="1" Background="Transparent" CornerRadius="0,0,3,3">
+                                                <TextBlock x:Name="OnIndicatorTB" Text="ON" FontSize="10" Foreground="#4B5563" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </Grid>
+                                    </Border>
+                                </Grid>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsChecked" Value="True">
+                                    <Setter TargetName="OuterBorder" Property="BorderBrush" Value="{StaticResource PassBrush}"/>
+                                    <Setter TargetName="OnIndicator" Property="Background" Value="{StaticResource PassBrush}"/>
+                                    <Setter TargetName="OnIndicatorTB" Property="Foreground" Value="White"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+
+            <Style TargetType="Button">
+                <Setter Property="Padding" Value="10,5" />
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="FontWeight" Value="Bold" />
+                <Setter Property="BorderThickness" Value="1" />
+                <Setter Property="Height" Value="35" />
+                <Setter Property="BorderBrush" Value="Transparent" />
+            </Style>
+
+            <Geometry x:Key="ClockIconGeometry">M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 10V7h-2v6h5v-2h-3z</Geometry>
+            <Geometry x:Key="AbortIconGeometry">M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z</Geometry>
+            <Geometry x:Key="PassIconGeometry">M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15l-4-4 1.41-1.41L11 14.17l7.59-7.59L20 8l-9 9z</Geometry>
+
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

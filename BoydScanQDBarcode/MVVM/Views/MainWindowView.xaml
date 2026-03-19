@@ -1,0 +1,95 @@
+﻿<Window x:Class="BoydScanQDBarcode.MVVM.Views.MainWindowView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BoydScanQDBarcode.MVVM.Views"
+        xmlns:rtbHelpers="clr-namespace:BoydScanQDBarcode.Helpers"
+        mc:Ignorable="d"
+        Title="Boyd Scan QD Barcode" Height="350" Width="1000" WindowStartupLocation="CenterScreen"
+        MinHeight="600" MinWidth="1100" MaxHeight="600" MaxWidth="1100" Closing="OnWindowClosing">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+
+        <local:HeaderView Grid.Row="0" Margin="5,0" />
+
+        <Border Grid.Row="1" Margin="5,10" CornerRadius="10" Padding="10" Background="#FFECEFEE">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="1"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="750"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Row="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        
+                        <TextBlock Grid.Row="0" Text="Hãy đọc QD Barcode" FontSize="30" FontWeight="DemiBold" Foreground="{StaticResource PrimaryBrush}" Margin="0,0,0,0"
+                           VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Century Gothic"/>
+
+                        <Border Grid.Row="1" CornerRadius="5" Background="White" BorderBrush="LightGray" BorderThickness="1" Margin="5">
+                            <TextBox x:Name="txtQDDataInput" Grid.Row="1" TextAlignment="Center" Margin="0" FontFamily="Century Gothic" BorderThickness="0"
+                         HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontSize="18"  TextChanged="OnQDDataInputChanged"/>
+                        </Border>
+                    </Grid>
+
+                    <Border x:Name="borderResult" Grid.Column="1" Margin="5" CornerRadius="10" Background="LightGray">
+                        <TextBlock x:Name="txtResult" Text="WAITING..." FontSize="35" FontWeight="DemiBold" Foreground="White" Margin="0,0,0,0"
+                           VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Century Gothic"/>
+                    </Border>
+                </Grid>
+
+
+
+
+                <Grid Grid.Row="2" Margin="5">
+                    <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Horizontal">
+                        <TextBlock Text="QD Lifetime:" VerticalAlignment="Center" HorizontalAlignment="Left" FontFamily="Century Gothic"/>
+                        <TextBlock x:Name="txtQDLifetime" Text="{Binding QDLifetime}" FontSize="13" FontWeight="SemiBold" Foreground="{StaticResource PrimaryBrush}" Margin="5,0,0,0"
+                               VerticalAlignment="Center" HorizontalAlignment="Left" Width="150" TextAlignment="Center" Background="White" FontFamily="Century Gothic"/>
+                    </StackPanel>
+
+                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
+                        <TextBlock Text="QD Remaining Times:" VerticalAlignment="Center" HorizontalAlignment="Left" FontFamily="Century Gothic"/>
+                        <TextBlock x:Name="txtQDRemainingTimes" Text="{Binding QDRemainingTimes}" FontSize="13" FontWeight="SemiBold" Foreground="{StaticResource PrimaryBrush}" Margin="5,0,0,0"
+                               VerticalAlignment="Center" HorizontalAlignment="Left" Width="150" TextAlignment="Center" Background="White" FontFamily="Century Gothic"/>
+                    </StackPanel>
+
+                    <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center" Orientation="Horizontal">
+                        <TextBlock Text="Station ID:" VerticalAlignment="Center" HorizontalAlignment="Left" FontFamily="Century Gothic"/>
+                        <TextBlock x:Name="txtStationID" Text="{Binding StationID}" FontSize="13" FontWeight="SemiBold" Foreground="{StaticResource PrimaryBrush}" Margin="5,0,0,0"
+                               VerticalAlignment="Center" HorizontalAlignment="Left" Width="150" TextAlignment="Center" Background="White" FontFamily="Century Gothic"/>
+                    </StackPanel>
+                </Grid>
+
+                <TextBlock Text="Scan QD Barcode Logs" Grid.Row="3" FontWeight="Bold" Foreground="{StaticResource PrimaryBrush}" Margin="5,20,0,0"
+                           VerticalAlignment="Center" HorizontalAlignment="Left" FontFamily="Century Gothic"/>
+                <Border Grid.Row="4" Margin="5,0" Background="{StaticResource PrimaryBrush}" Height="1"/>
+
+                <RichTextBox rtbHelpers:RichTextBoxHelper.LogItemsSource="{Binding LogMessages}" 
+                             x:Name="rtbLog" FontFamily="Century Gothic"
+                             Grid.Row="5" Margin="5" IsReadOnly="True" 
+                             VerticalScrollBarVisibility="Auto"
+                             Background="White"></RichTextBox>
+            </Grid>
+
+        </Border>
+        
+        
+    </Grid>
+</Window>
