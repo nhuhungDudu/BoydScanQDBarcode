@@ -478,8 +478,6 @@ namespace BoydScanQDBarcode.MVVM.Views
             Dispatcher.Invoke(() =>
             {
                 LogMessages.Add($"[{DateTime.Now.ToString("HH:mm:ss")}] {message}");
-                RaisePropertyChanged raisePropertyChanged = new RaisePropertyChanged();
-                raisePropertyChanged.OnPropertyChanged(nameof(LogMessages));
             });
         }
 
