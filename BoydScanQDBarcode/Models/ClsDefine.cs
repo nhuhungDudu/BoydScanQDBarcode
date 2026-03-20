@@ -13,14 +13,9 @@ public static class ClsDefine
     {
         public static bool IsOfflineMode = bool.Parse(ClsIO.ReadValue("SystemCongfig", "OfflineMode", "False", "C:\\Aavid_Test\\Setup-ini\\SystemConfiguration.ini"));
         public static int iLifeTimeWarning = int.Parse(ClsIO.ReadValue("SystemCongfig", "LifeTimeWarning", "20", "C:\\Aavid_Test\\Setup-ini\\SystemConfiguration.ini"));
-        public static string sQDlogpath = ClsIO.ReadValue("SystemCongfig", "QDlogpath", "C:\\Model\\LogLifeTime\\QDlifetime.json", "C:\\Aavid_Test\\Setup-ini\\SystemConfiguration.ini");
-        //public static string sOringlogpath = ClsIO.ReadValue("SystemCongfig", "Oringlogpath", "C:\\Model\\LogLifeTime\\Oringlifetime.json", "C:\\Aavid_Test\\Setup-ini\\SystemConfiguration.ini");
-        public static string sQD2logpath = ClsIO.ReadValue("SystemCongfig", "QD2logpath", "C:\\Model\\LogLifeTime\\QD2lifetime.json", "C:\\Aavid_Test\\Setup-ini\\SystemConfiguration.ini");
-        //public static string sOring2logpath = ClsIO.ReadValue("SystemCongfig", "Oring2logpath", "C:\\Model\\LogLifeTime\\Oring2lifetime.json", "C:\\Aavid_Test\\Setup-ini\\SystemConfiguration.ini");
-        public static string sQD3logpath = ClsIO.ReadValue("SystemCongfig", "QD3logpath", "C:\\Model\\LogLifeTime\\QD3lifetime.json", "C:\\Aavid_Test\\Setup-ini\\SystemConfiguration.ini");
-        //public static string sOring2logpath = ClsIO.ReadValue("SystemCongfig", "Oring2logpath", "C:\\Model\\LogLifeTime\\Oring2lifetime.json", "C:\\Aavid_Test\\Setup-ini\\SystemConfiguration.ini");
-        public static string sQD4logpath = ClsIO.ReadValue("SystemCongfig", "QD4logpath", "C:\\Model\\LogLifeTime\\QD4lifetime.json", "C:\\Aavid_Test\\Setup-ini\\SystemConfiguration.ini");
-        //public static string sOring2logpath = ClsIO.ReadValue("SystemCongfig", "Oring2logpath", "C:\\Model\\LogLifeTime\\Oring2lifetime.json", "C:\\Aavid_Test\\Setup-ini\\SystemConfiguration.ini");
+
+
+        public static int iLastScanTimeOut = int.Parse(ClsIO.ReadValue("SystemCongfig", "LastScanTimeOut", "14", "C:\\Aavid_Test\\Setup-ini\\SystemConfiguration.ini"));
     }
     public class DefineASP
     {

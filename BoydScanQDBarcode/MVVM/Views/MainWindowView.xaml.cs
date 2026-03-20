@@ -306,7 +306,7 @@ namespace BoydScanQDBarcode.MVVM.Views
             }
             string query = $@"SELECT [SerialNumber]
                                 FROM [EquipmentManagerment].[dbo].[EquipmentRemaining]
-                                where SerialNumber = '{serialNumber}'";
+                                where SerialNumber = '{serialNumber}' ";
 
             DataTable dtResult = ParameterDB.ExecuteQuery(query);
 
@@ -325,6 +325,38 @@ namespace BoydScanQDBarcode.MVVM.Views
             {
                 AddLogInfor(message);
             }
+
+            //
+            query = $@"SELECT TOP 1 [Date_Time]
+                 FROM [EquipmentManagerment].[dbo].[EquipmentRemaining]
+                 WHERE SerialNumber = '{serialNumber}' 
+                 ORDER BY Date_Time DESC";
+            dtResult = ParameterDB.ExecuteQuery(query);
+
+            if (dtResult.Rows.Count > 0)
+            {
+                DateTime latestDate = Convert.ToDateTime(dtResult.Rows[0]["Date_Time"]);
+                
+                double hoursSinceLastUse = (DateTime.Now - latestDate).TotalHours;
+
+                AddLogInfor($"Latest usage of fixture {serialNumber} was on {latestDate}. Time since last use: {hoursSinceLastUse:F2} hours.");
+
+                if(hoursSinceLastUse < ClsDefine.DefineSystem.iLastScanTimeOut)
+                {
+                    AddLogWarning($"Fixture {serialNumber} was last used {hoursSinceLastUse:F2} hours ago, which is less than the recommended rest time of {ClsDefine.DefineSystem.iLastScanTimeOut} hours. " +
+                        $"Please ensure the fixture has had sufficient rest before reuse to avoid potential issues.");
+
+                    Dispatcher.Invoke(() =>
+                    {
+                        var dialog = new WDMessageView($"Fixture {serialNumber} đã được scan {hoursSinceLastUse:F2} tiếng trước, ít hơn thời gian tối thiểu để được scan lại là {ClsDefine.DefineSystem.iLastScanTimeOut} tiếng. ");
+                        dialog.ShowDialog();   // Fixed: removed 'this'
+                    });
+
+                    return false;
+                }
+
+            }
+
 
 
             if (dtResult.Rows.Count > iLifeTimeLimit)
