@@ -111,6 +111,11 @@ namespace BoydScanQDBarcode.MVVM.Views
             GetFixtureLifeTime();
             AddLogSuccess($"Fixture lifetime limit for station {StateCommon.Secsion.ToString()}: {iLifeTimeLimit} cycles");
 
+
+            AddLogInfor($"Getting last scan timeout setting from configuration...");
+            txtLastScanTimeout.Text = ClsDefine.DefineSystem.iLastScanTimeOut.ToString();
+            AddLogInfor($"Last scan timeout setting: {ClsDefine.DefineSystem.iLastScanTimeOut} hours");
+
             StationID = stationID;
             txtStationID.Text = stationID;
             txtQDLifetime.Text = iLifeTimeLimit.ToString();
@@ -160,7 +165,16 @@ namespace BoydScanQDBarcode.MVVM.Views
                 AddLogInfor($"Scanned QD fixture with Serial Number: {QDInput}");
 
                 bool bCheckCable = CheckCableInDB(QDInput.Trim());
-                AddLogInfor($"Check cable in database completed for fixture {QDInput}. Valid: {bCheckCable}");
+
+                string checkResultMessage = $"Check cable in database completed for fixture {QDInput}. Valid: {bCheckCable}";
+                if(bCheckCable)
+                {
+                    AddLogSuccess(checkResultMessage);
+                }
+                else
+                {
+                    AddLogError(checkResultMessage);
+                }
 
                 if (bCheckCable)
                 {
@@ -304,6 +318,9 @@ namespace BoydScanQDBarcode.MVVM.Views
                 });
                 return false;
             }
+
+            AddLogInfor($"Check format for fixture {serialNumber} done. Now checking database records for this fixture...");
+
             string query = $@"SELECT [SerialNumber]
                                 FROM [EquipmentManagerment].[dbo].[EquipmentRemaining]
                                 where SerialNumber = '{serialNumber}' ";
@@ -317,6 +334,7 @@ namespace BoydScanQDBarcode.MVVM.Views
             borderRemainingTimes.Background = (timeRemaining <= ClsDefine.DefineSystem.iLifeTimeWarning) ? Brushes.Red : Brushes.White;
 
             string message = $"Fixture {serialNumber} has been used {dtResult.Rows.Count} times based on database records. Remaining times {timeRemaining}.";
+
             if (timeRemaining <= ClsDefine.DefineSystem.iLifeTimeWarning)
             {
                 AddLogWarning(message + $" Fixture is approaching its lifetime limit.");
@@ -324,9 +342,9 @@ namespace BoydScanQDBarcode.MVVM.Views
             else
             {
                 AddLogInfor(message);
-            }
+            } 
 
-            //
+
             query = $@"SELECT TOP 1 [Date_Time]
                  FROM [EquipmentManagerment].[dbo].[EquipmentRemaining]
                  WHERE SerialNumber = '{serialNumber}' 
@@ -335,16 +353,18 @@ namespace BoydScanQDBarcode.MVVM.Views
 
             if (dtResult.Rows.Count > 0)
             {
+                AddLogInfor($"Now checking the last scanned time for fixture {serialNumber} to ensure it has had sufficient rest before re-scan...");
+
                 DateTime latestDate = Convert.ToDateTime(dtResult.Rows[0]["Date_Time"]);
                 
                 double hoursSinceLastUse = (DateTime.Now - latestDate).TotalHours;
 
-                AddLogInfor($"Latest usage of fixture {serialNumber} was on {latestDate}. Time since last use: {hoursSinceLastUse:F2} hours.");
+                AddLogInfor($"Latest scanned of fixture {serialNumber} was on {latestDate}. Time since last scanned: {hoursSinceLastUse:F2} hours.");
 
                 if(hoursSinceLastUse < ClsDefine.DefineSystem.iLastScanTimeOut)
                 {
-                    AddLogWarning($"Fixture {serialNumber} was last used {hoursSinceLastUse:F2} hours ago, which is less than the recommended rest time of {ClsDefine.DefineSystem.iLastScanTimeOut} hours. " +
-                        $"Please ensure the fixture has had sufficient rest before reuse to avoid potential issues.");
+                    AddLogWarning($"Fixture {serialNumber} was last scanned {hoursSinceLastUse:F2} hours ago, which is less than the recommended rest time of {ClsDefine.DefineSystem.iLastScanTimeOut} hours. " +
+                        $"Please ensure the fixture has had sufficient rest before re-scan to avoid potential issues.");
 
                     Dispatcher.Invoke(() =>
                     {

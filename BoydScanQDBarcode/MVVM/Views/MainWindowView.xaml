@@ -58,27 +58,44 @@
 
 
                 <Grid Grid.Row="2" Margin="5">
-                    <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Horizontal">
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Orientation="Horizontal">
                         <TextBlock Text="QD Lifetime:" VerticalAlignment="Center" HorizontalAlignment="Left" FontFamily="Century Gothic"/>
 
                         <Border CornerRadius="5" Background="White" BorderBrush="LightGray" BorderThickness="1" Margin="5,0,0,0" Height="30">
                             <TextBlock x:Name="txtQDLifetime" Text="{Binding QDLifetime}" FontSize="13" FontWeight="SemiBold" Foreground="{StaticResource PrimaryBrush}"
-                               VerticalAlignment="Center" HorizontalAlignment="Left" Width="150" TextAlignment="Center" FontFamily="Century Gothic"/>
+                               VerticalAlignment="Center" HorizontalAlignment="Left" Width="100" TextAlignment="Center" FontFamily="Century Gothic"/>
                         </Border>
                             
 
                     </StackPanel>
 
-                    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
+                    <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
                         <TextBlock Text="QD Remaining Times:" VerticalAlignment="Center" HorizontalAlignment="Left" FontFamily="Century Gothic"/>
 
                         <Border x:Name="borderRemainingTimes" CornerRadius="5" Background="White" BorderBrush="LightGray" BorderThickness="1" Margin="5,0,0,0" Height="30">
                             <TextBlock x:Name="txtQDRemainingTimes" Text="{Binding QDRemainingTimes}" FontSize="13" FontWeight="SemiBold" Foreground="{StaticResource PrimaryBrush}"
-                               VerticalAlignment="Center" HorizontalAlignment="Left" Width="150" TextAlignment="Center" Background="Transparent" FontFamily="Century Gothic"/>
+                               VerticalAlignment="Center" HorizontalAlignment="Left" Width="100" TextAlignment="Center" Background="Transparent" FontFamily="Century Gothic"/>
                         </Border>
                     </StackPanel>
 
-                    <StackPanel HorizontalAlignment="Right" VerticalAlignment="Center" Orientation="Horizontal">
+                    <StackPanel Grid.Column="2" HorizontalAlignment="Right" VerticalAlignment="Center" Orientation="Horizontal">
+                        <TextBlock Text="Last Scan Timeout:" VerticalAlignment="Center" HorizontalAlignment="Left" FontFamily="Century Gothic"/>
+
+                        <Border CornerRadius="5" Background="White" BorderBrush="LightGray" BorderThickness="1" Margin="5,0,0,0" Height="30">
+                            <TextBlock x:Name="txtLastScanTimeout" Text="{Binding StationID}" FontSize="13" FontWeight="SemiBold" Foreground="{StaticResource PrimaryBrush}"
+                               VerticalAlignment="Center" HorizontalAlignment="Left" Width="100" TextAlignment="Center" Background="White" FontFamily="Century Gothic"/>
+                        </Border>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="3" HorizontalAlignment="Right" VerticalAlignment="Center" Orientation="Horizontal">
                         <TextBlock Text="Station ID:" VerticalAlignment="Center" HorizontalAlignment="Left" FontFamily="Century Gothic"/>
 
                         <Border CornerRadius="5" Background="White" BorderBrush="LightGray" BorderThickness="1" Margin="5,0,0,0" Height="30">
