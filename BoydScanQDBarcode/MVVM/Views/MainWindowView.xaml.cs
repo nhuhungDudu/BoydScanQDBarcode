@@ -530,6 +530,13 @@ namespace BoydScanQDBarcode.MVVM.Views
             Dispatcher.Invoke(() =>
             {
                 LogMessages.Add($"[{DateTime.Now.ToString("HH:mm:ss")}] {message}");
+
+                //Keep log messages collection to a reasonable size to prevent memory issues.
+                //You can adjust the limit as needed or implement a more sophisticated log retention policy.
+                if (LogMessages.Count > 500)
+                {
+                    LogMessages.RemoveAt(0);
+                }
             });
         }
 
