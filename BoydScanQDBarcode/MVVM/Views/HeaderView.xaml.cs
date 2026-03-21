@@ -31,6 +31,7 @@ namespace BoydScanQDBarcode.MVVM.Views
         private readonly PerformanceCounter memAvailableCounter;
         private readonly ulong memTotal = 0;
         private readonly DispatcherTimer timer;
+        private readonly BrushConverter brushConverter;
         private const int KB = 1024;
         private const int MB = KB * 1024;
         private const int GB = MB * 1024;
@@ -38,6 +39,9 @@ namespace BoydScanQDBarcode.MVVM.Views
         public HeaderView()
         {
             InitializeComponent();
+
+            brushConverter = new BrushConverter();
+
             cpuCounter = new PerformanceCounter("Processor", "% Processor Time", "_Total");
             memAvailableCounter = new PerformanceCounter("Memory", "Available Bytes");
 
@@ -74,6 +78,19 @@ namespace BoydScanQDBarcode.MVVM.Views
             double usedWidth = cpuUsage / 100.0;
             cpuUsedColumn.Width = new GridLength(usedWidth, GridUnitType.Star);
             cpuUnusedColumn.Width = new GridLength(1 - usedWidth, GridUnitType.Star);
+
+                if (cpuUsage > 75)
+                {
+                    cpuUsedBackground.Background = Brushes.Red;
+                }
+                else if (cpuUsage > 50)
+                {
+                    cpuUsedBackground.Background = Brushes.Orange;
+                }
+                else
+                {
+                    cpuUsedBackground.Background = brushConverter.ConvertFromString("#28A745") as Brush;
+            }
         }
 
         private void UpdateMemoryUsage()
@@ -86,6 +103,19 @@ namespace BoydScanQDBarcode.MVVM.Views
 
             memUsedColumn.Width = new GridLength(memUsagePercentage, GridUnitType.Star);
             memUnusedColumn.Width = new GridLength(1 - memUsagePercentage, GridUnitType.Star);
+
+            if (memUsagePercentage > 0.85)
+            {
+                memUsedBackground.Background = Brushes.Red;
+            }
+            else if (memUsagePercentage > 0.6)
+            {
+                memUsedBackground.Background = Brushes.Orange;
+            }
+            else
+            {
+                memUsedBackground.Background = brushConverter.ConvertFromString("#28A745") as Brush;
+            }
         }
 
         private void UpdateDiskUsage()
@@ -96,15 +126,28 @@ namespace BoydScanQDBarcode.MVVM.Views
             long usedSpaceC = totalSpaceC - freeSpaceC;
             double diskCUsagePercentage = (double)usedSpaceC / totalSpaceC;
 
-/*            if(diskCUsagePercentage > 0.5)
-            {
-                diskCUsedBackground.Background = Brushes.Red;
-            }*/
+            /*            if(diskCUsagePercentage > 0.5)
+                        {
+                            diskCUsedBackground.Background = Brushes.Red;
+                        }*/
 
             diskCText.Text = $"{usedSpaceC / GB:F0}GB/{totalSpaceC / GB:F0}GB ({diskCUsagePercentage:P1})";
 
             diskCUsedColumn.Width = new GridLength(diskCUsagePercentage, GridUnitType.Star);
             diskCUnusedColumn.Width = new GridLength(1 - diskCUsagePercentage, GridUnitType.Star);
+
+            if (diskCUsagePercentage > 0.8)
+            {
+                diskCUsedBackground.Background = Brushes.Red;
+            }
+            else if (diskCUsagePercentage > 0.6)
+            {
+                diskCUsedBackground.Background = Brushes.Orange;
+            }
+            else
+            {
+                diskCUsedBackground.Background = brushConverter.ConvertFromString("#28A745") as Brush;
+            }
         }
     }
 }

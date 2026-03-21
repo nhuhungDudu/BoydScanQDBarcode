@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:BoydScanQDBarcode.MVVM.Views"
         xmlns:rtbHelpers="clr-namespace:BoydScanQDBarcode.Helpers"
         mc:Ignorable="d"
-        Title="Boyd Scan QD Barcode" Height="350" Width="1000" WindowStartupLocation="CenterScreen"
+        Title="QD LIFETIME MANAGEMENT" Height="350" Width="1000" WindowStartupLocation="CenterScreen"
         MinHeight="600" MinWidth="1100" MaxHeight="600" MaxWidth="1100" Closing="OnWindowClosing">
     <Grid>
         <Grid.RowDefinitions>

@@ -46,7 +46,7 @@
                             <ColumnDefinition Width="*" x:Name="cpuUsedColumn" />
                             <ColumnDefinition Width="*" x:Name="cpuUnusedColumn" />
                         </Grid.ColumnDefinitions>
-                        <Border Grid.Column="0" Background="#28A745" />
+                        <Border x:Name="cpuUsedBackground" Grid.Column="0" Background="#28A745" />
                     </Grid>
                 </Grid>
                 <TextBlock Grid.Column="2" x:Name="CpuUsageText" Text="0.00%" Style="{StaticResource TextBlockNormal}" Foreground="White" Margin="15,0,0,0"/>
@@ -59,7 +59,7 @@
                             <ColumnDefinition Width="*" x:Name="memUsedColumn" />
                             <ColumnDefinition Width="*" x:Name="memUnusedColumn" />
                         </Grid.ColumnDefinitions>
-                        <Border Grid.Column="0" Background="#28A745" />
+                        <Border x:Name="memUsedBackground" Grid.Column="0" Background="#28A745" />
                     </Grid>
                 </Grid>
                 <TextBlock Grid.Row="1" Grid.Column="2" x:Name="MemUsageText" Text="0GB/0GB (0%)" Style="{StaticResource TextBlockNormal}" Foreground="White" Margin="15,0,0,0"/>
@@ -73,7 +73,7 @@
                             <ColumnDefinition Width="*" x:Name="diskCUsedColumn" />
                             <ColumnDefinition Width="*" x:Name="diskCUnusedColumn" />
                         </Grid.ColumnDefinitions>
-                        <Border Grid.Column="0" x:Name="diskCUsedBackground" Background="#28A745" />
+                        <Border x:Name="diskCUsedBackground" Grid.Column="0" Background="#28A745" />
                     </Grid>
                 </Grid>
 

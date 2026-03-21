@@ -6,7 +6,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
-    <ApplicationIcon>BOYD.ico</ApplicationIcon>
+    <ApplicationIcon>QD-removebg-preview.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="BOYD.ico" />
+    <Content Include="QD-removebg-preview.ico" />
   </ItemGroup>
 
   <ItemGroup>
